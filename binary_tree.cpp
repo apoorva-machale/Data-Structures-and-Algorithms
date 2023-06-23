@@ -107,6 +107,63 @@ void inorder_wo_recursion(struct Node* node) {
  
 }
 
+int height(Node *root){
+	int lht=1,rht=1,d=0;
+	if(root != NULL){
+		if(root->left == NULL && root->right == NULL)
+			d=1;
+		else{
+			lht = lht + height(root->left);
+			rht = rht + height(root->right);
+			if(lht>rht)
+				d=lht;
+			else
+				d=rht;
+		}
+	}
+	return d;
+}
+
+int non_height(Node* root){
+	int lh=0,rh=0,d=0;
+	Node* temp1=root;
+	Node* temp2=root;
+	while(temp1 != NULL){
+		lh=lh+1;
+		temp1=temp1->left;
+	}
+	while(temp2 != NULL){
+		rh=rh+1;
+		temp2=temp2->right;
+	}
+	if(lh>rh)
+		d=lh;
+	else
+		d=rh;
+	return d;
+}
+
+void rleaf(Node* root){
+
+	if(root != NULL){
+		if(root->left == NULL && root->right == NULL)
+			cout<<" "<<root->data;
+		else{
+			rleaf(root->left);
+			rleaf(root->right);
+		}
+	}
+}
+
+int rleafcount(Node* root){
+	if(root!=NULL){
+		if(root->left == NULL && root->right == NULL)
+			return 1;
+		else
+			return(rleafcount(root->left)+rleafcount(root->right));
+	}
+}
+
 void insert(Node* root, Node* pnew){
 	char ch;
 	cout<<"your choice = l or r";
@@ -171,6 +228,19 @@ int main() {
   
   cout << "\nPostorder traversal without recursion ";
   postorder_wo_recursion(root);
+  
+  int d = height(root);
+  cout<<"\nHeight of the tree "<<d;
+  
+  int h = non_height(root);
+  cout<<"\nHeight of the tree without using recursion "<<h;
+  
+  cout<<"\nLeaf Nodes are ";
+  rleaf(root);
+  
+  int l = rleafcount(root);
+  cout<<"\nNumber of leaf nodes "<<l;
+
 
   return 0;
   
@@ -178,27 +248,30 @@ int main() {
 
 
 
-//output
 /*
+OUTPUT
+
 apoorva@ubuntu:~$ cd Documents/
 apoorva@ubuntu:~/Documents$ cd cpp/
 apoorva@ubuntu:~/Documents/cpp$ cd Binary\ Tree/
 apoorva@ubuntu:~/Documents/cpp/Binary Tree$ g++ -o binary binary_tree.cpp 
 apoorva@ubuntu:~/Documents/cpp/Binary Tree$ ./binary
-Enter number of nodes5
-Node number7
-Node number4
-your choice = l or r9
-Invalid characterNode number4
+Enter number of nodes4
+Node number1
+Node number2
 your choice = l or rl
+Node number3
+your choice = l or rr
 Node number4
 your choice = l or rr
-Node number0
-your choice = l or rl
 your choice = l or rr
-Inorder traversal 4->0->7->4->
-Inorder traversal without recursion 4->0->7->4->
-Preorder traversal 7->4->0->4->
-Preorder traversal without recursion 7->4->0->4->
-Postorder traversal 0->4->4->7->
-Postorder traversal without recursion 0->4->4->7->*/
+Inorder traversal 2->1->3->4->
+Inorder traversal without recursion 2->1->3->4->
+Preorder traversal 1->2->3->4->
+Preorder traversal without recursion 1->2->3->4->
+Postorder traversal 2->4->3->1->
+Postorder traversal without recursion 2->4->3->1->
+Height of the tree 3
+Height of the tree without using recursion 3
+Leaf Nodes are  2 4
+Number of leaf nodes 2*/
