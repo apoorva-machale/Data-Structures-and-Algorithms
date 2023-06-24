@@ -184,6 +184,17 @@ void insert(Node* root, Node* pnew){
 	
 }
 
+Node* invert_binary(Node* root){
+	if(root == NULL)
+		return NULL;
+	if(!(root->left == NULL && root->right==NULL))
+		swap(root->left,root->right);
+	//cout<<"\t"<<root->data;
+	invert_binary(root->left);
+	invert_binary(root->right);
+	return root;
+}
+
 Node* create(Node* root){
  int n,x;
  cout<<"Enter number of nodes";
@@ -240,6 +251,9 @@ int main() {
   
   int l = rleafcount(root);
   cout<<"\nNumber of leaf nodes "<<l;
+  
+  cout<<"\nInvert Binary Tree";
+  root = invert_binary(root);
 
 
   return 0;
