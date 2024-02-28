@@ -1,3 +1,5 @@
+#https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+
 class job:
     def __init__(self, id, deadline, profit):
         self.id = id
