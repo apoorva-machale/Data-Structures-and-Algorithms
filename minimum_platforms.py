@@ -1,6 +1,7 @@
 #   https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1
 
 def countPlatforms(arr, dep):
+    #Sorting affects the index for the railways but we do not require them 
     arr.sort()
     dep.sort()
 
