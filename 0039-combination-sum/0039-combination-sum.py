@@ -1,18 +1,24 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ans = []
-        ds = []
+        results = []
 
-
-        def findCombination(ind: int, target: int):
-            if ind == len(candidates):
-                if target == 0:
-                    ans.append(ds[:])
+        def backtrack(remain, comb, start):
+            if remain == 0:
+                # make a deep copy of the current combination
+                results.append(list(comb))
                 return
-            if candidates[ind] <= target:
-                ds.append(candidates[ind])
-                findCombination(ind, target - candidates[ind])
-                ds.pop()
-            findCombination(ind + 1, target)
-        findCombination(0, target)
-        return ans
+            elif remain < 0:
+                # exceed the scope, stop exploration.
+                return
+
+            for i in range(start, len(candidates)):
+                # add the number into the combination
+                comb.append(candidates[i])
+                # give the current number another chance, rather than moving on
+                backtrack(remain - candidates[i], comb, i)
+                # backtrack, remove the number from the combination
+                comb.pop()
+
+        backtrack(target, [], 0)
+
+        return results
