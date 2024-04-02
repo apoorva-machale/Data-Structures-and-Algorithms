@@ -18,7 +18,7 @@ class TimeMap:
         if not key in self.key_time_map:
             return ""
         
-        if timestamp < self.key_time_map[0][0]:
+        if timestamp < self.key_time_map[key][0][0]:
             return ""
         
         left=0
@@ -31,3 +31,14 @@ class TimeMap:
                 right = mid
         # If iterator points to first element it means, no time <= timestamp exists.
         return "" if right == 0 else self.key_time_map[key][right - 1][1]
+    
+time_map = TimeMap()
+result = [-1]*6
+result[0] = time_map.set("foo", "bar", 1)
+result[1] = time_map.get("foo", 1)
+result[2] = time_map.get("foo", 3)
+result[3] = time_map.set("foo","bar2", 4)
+result[4] = time_map.get("foo", 4)
+result[5] = time_map.get("foo", 5)
+
+print(result)
