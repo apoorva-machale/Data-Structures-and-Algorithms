@@ -6,23 +6,35 @@
 #         self.right = right
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        counter = defaultdict(int)
-        queue = deque([root])
-        
-        while queue:
-            node = queue.popleft()
-            counter[node.val] += 1
+        def dfs(node, values):
+            if not node:
+                return
             
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
+            # Inorder traversal visits nodes in sorted order
+            dfs(node.left, values)
+            values.append(node.val)
+            dfs(node.right, values)
+            
+        values = []
+        dfs(root, values)
         
-        max_freq = max(counter.values())
-        
+        max_streak = 0
+        curr_streak = 0
+        curr_num = 0
         ans = []
-        for key in counter:
-            if counter[key] == max_freq:
-                ans.append(key)
         
+        for num in values:
+            if num == curr_num:
+                curr_streak += 1
+            else:
+                curr_streak = 1
+                curr_num = num
+                
+            if curr_streak > max_streak:
+                ans = []
+                max_streak = curr_streak
+
+            if curr_streak == max_streak:
+                ans.append(num)
+
         return ans
