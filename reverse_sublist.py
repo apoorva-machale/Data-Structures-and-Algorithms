@@ -65,6 +65,6 @@ head = object.insert_node(head, 1)
 
 print("Original list:")
 object.print_list(head) 
-reversed_head = object.reverse_sublist(head,2,3)
+reversed_head = object.reverse_sublist(head,2,5)
 print("Reversed entire list:")
 LinkedList().print_list(reversed_head)
