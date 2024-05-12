@@ -1,6 +1,8 @@
 class Mergesort:
     def m_sort(self, array):
         if len(array) >1:
+
+            #floor division which alllows you to divide numbers and rounds off to nearest whole number
             r = len(array) // 2
             
             L = array[:r]
