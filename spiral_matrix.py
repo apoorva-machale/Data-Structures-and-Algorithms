@@ -13,6 +13,7 @@ def spiral_matrix(matrix):
         while True:
             next_row = row + directions[current_direction][0]
             next_col = col + directions[current_direction][1]
+            # hop to alternate blocks  
             if not (0 <= next_row < rows and 0 <= next_col < cols):
                 break
             if matrix[next_row][next_col] == visited:
