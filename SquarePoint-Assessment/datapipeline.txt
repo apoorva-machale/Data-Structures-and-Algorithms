@@ -1,0 +1,5 @@
+# FileType: employee-salary
+# Columns: employee_id,employee_name,job_title,salary,job_start_date,job_end_date
+# Types: int,str,str,int,datetime,datetime
+41,Alan,Chef,40000,2018-10-29,
+52,Brenda,Teacher,30000,,2018-01-13
