@@ -2,7 +2,7 @@ import io
 import os
 from datetime import datetime
 
-def parse_file(iostring):
+def parse_file(text):
     """
     Parse the custom payroll file format into a list of dicts.
     - Skips lines starting with '#'
@@ -12,8 +12,8 @@ def parse_file(iostring):
     rows = []
     headers = []
 
-    iostring.seek(0)
-    for line in iostring:
+    # iostring.seek(0)
+    for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
@@ -115,9 +115,8 @@ def main():
     filename = "datapipeline.txt"  # change if needed
     with open(filename, "r") as infile:
         file_content = infile.read()
-
-    f = io.StringIO(file_content)
-    pf = parse_file(f)
+        
+    pf = parse_file(file_content)
 
     r1 = earned_more_than_30K(pf)
     r2 = held_job_longest_in_day(pf)
